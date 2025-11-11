@@ -40,6 +40,7 @@
                     <a href="#usaha" class="text-gray-700 hover:text-green-600 transition font-medium">Usaha</a>
                     <a href="#produk" class="text-gray-700 hover:text-green-600 transition font-medium">Produk</a>
                     <a href="#kontak" class="text-gray-700 hover:text-green-600 transition font-medium">Kontak</a>
+                    <a href="login.php" class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Login</a>
                     <button class="p-2 hover:bg-gray-100 rounded-lg transition">
                         <i class="fa-solid fa-bell text-gray-600"></i>
                     </button>
@@ -56,6 +57,7 @@
                 <a href="#usaha" class="block text-gray-700 hover:text-green-600 font-medium">Usaha</a>
                 <a href="#produk" class="block text-gray-700 hover:text-green-600 font-medium">Produk</a>
                 <a href="#kontak" class="block text-gray-700 hover:text-green-600 font-medium">Kontak</a>
+                <a href="login.php" class="block text-gray-700 hover:text-green-600 font-medium">Login</a>
             </div>
         </div>
     </header>

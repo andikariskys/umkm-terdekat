@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-    $role = $_POST['role'] ?? '';
+    $role = $_POST['role'] ?? 'pemilik';
 
     if ($name && $username && $password && $role) {
         $success = true;
@@ -104,28 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
                             placeholder="Buat password">
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block text-gray-700 font-semibold mb-3">
-                            <i class="fa-solid fa-user-tag mr-2"></i>Daftar Sebagai
-                        </label>
-                        <div class="space-y-3">
-                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-500 transition">
-                                <input type="radio" name="role" value="pengunjung" required class="text-green-600 focus:ring-green-500">
-                                <div class="ml-3">
-                                    <div class="font-semibold text-gray-900">Pengunjung</div>
-                                    <div class="text-sm text-gray-600">Jelajahi dan beli produk UMKM</div>
-                                </div>
-                            </label>
-                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-500 transition">
-                                <input type="radio" name="role" value="pemilik" required class="text-green-600 focus:ring-green-500">
-                                <div class="ml-3">
-                                    <div class="font-semibold text-gray-900">Pemilik UMKM</div>
-                                    <div class="text-sm text-gray-600">Kelola usaha dan produk</div>
-                                </div>
-                            </label>
-                        </div>
                     </div>
 
                     <button

@@ -256,9 +256,9 @@ $salesStats = [
                             <span class="font-semibold text-gray-900">280</span>
                         </div>
                     </div>
-                    <button class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-2 rounded-lg font-semibold transition">
+                    <a href="edit-profil.php" class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-2 rounded-lg font-semibold transition inline-block text-center">
                         <i class="fa-solid fa-pen-to-square mr-2"></i>Edit Profil
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Quick Stats -->

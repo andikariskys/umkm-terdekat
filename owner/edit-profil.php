@@ -222,6 +222,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <p class="text-sm text-gray-500 mt-1">Format: JPG, PNG. Maksimal 2MB.</p>
                         </div>
 
+                        <!-- Toggle Tampilkan Stok Produk -->
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-semibold mb-3">
+                                <i class="fa-solid fa-boxes-stacked mr-2"></i>Tampilkan Stok Produk
+                            </label>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <input
+                                        type="radio"
+                                        id="show_stock_yes"
+                                        name="show_stock"
+                                        value="1"
+                                        checked
+                                        class="w-4 h-4 text-green-600 border-gray-300 focus:ring-2 focus:ring-green-500 cursor-pointer">
+                                    <label for="show_stock_yes" class="ml-3 text-gray-700 cursor-pointer flex items-center">
+                                        <i class="fa-solid fa-check-circle text-green-600 mr-2"></i>
+                                        <span>Tampilkan</span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input
+                                        type="radio"
+                                        id="show_stock_no"
+                                        name="show_stock"
+                                        value="0"
+                                        class="w-4 h-4 text-green-600 border-gray-300 focus:ring-2 focus:ring-green-500 cursor-pointer">
+                                    <label for="show_stock_no" class="ml-3 text-gray-700 cursor-pointer flex items-center">
+                                        <i class="fa-solid fa-circle-xmark text-red-600 mr-2"></i>
+                                        <span>Jangan Tampilkan</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">Pilih apakah stok produk ditampilkan kepada pelanggan atau tidak.</p>
+                        </div>
+
                         <!-- Buttons -->
                         <div class="flex items-center gap-4 pt-6 border-t border-gray-200">
                             <button

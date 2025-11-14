@@ -81,9 +81,10 @@ $salesStats = [
                 <div>
                     <h2 class="text-3xl font-bold mb-2">Selamat Datang, <?= explode(' ', $user['name'])[0] ?>! 🏪</h2>
                     <p class="text-green-100 mb-4">Kelola usaha <strong><?= $user['business'] ?></strong> dengan mudah</p>
-                    <button class="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-green-50 transition">
-                        <i class="fa-solid fa-plus mr-2"></i>Tambah Produk Baru
-                    </button>
+                    <a href="tambah-produk.php" class="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-green-50 transition inline-flex items-center space-x-2">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        <span>Tambah Produk Baru</span>
+                    </a>
                 </div>
                 <div class="text-6xl mt-4 md:mt-0 hidden md:block">📊</div>
             </div>
@@ -140,9 +141,10 @@ $salesStats = [
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-bold text-gray-900">Kelola Produk</h3>
-                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition">
-                            <i class="fa-solid fa-plus mr-2"></i>Tambah Produk
-                        </button>
+                        <a href="tambah-produk.php" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Tambah Produk</span>
+                        </a>
                     </div>
                     <div class="w-full overflow-x-auto">
                         <table class="min-w-max w-full border-collapse">
@@ -280,10 +282,10 @@ $salesStats = [
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                     <h3 class="text-xl font-bold text-gray-900 mb-6">Aksi Cepat</h3>
                     <div class="space-y-3">
-                        <button class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
+                        <a href="tambah-produk.php" class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-plus"></i>
                             <span>Tambah Produk</span>
-                        </button>
+                        </a>
                         <button class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-chart-line"></i>
                             <span>Lihat Laporan</span>

@@ -57,10 +57,6 @@ $salesStats = [
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="p-2 hover:bg-gray-100 rounded-lg transition relative">
-                        <i class="fa-solid fa-bell text-gray-600"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                    </button>
                     <div class="flex items-center space-x-2">
                         <div class="text-right hidden sm:block">
                             <p class="font-semibold text-gray-900"><?= $user['name'] ?></p>
@@ -89,7 +85,7 @@ $salesStats = [
                         <i class="fa-solid fa-plus mr-2"></i>Tambah Produk Baru
                     </button>
                 </div>
-                <div class="text-6xl mt-4 md:mt-0">📊</div>
+                <div class="text-6xl mt-4 md:mt-0 hidden md:block">📊</div>
             </div>
         </div>
 
@@ -145,24 +141,24 @@ $salesStats = [
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-bold text-gray-900">Kelola Produk</h3>
                         <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition">
-                            <i class="fa-solid fa-plus mr-2"></i>Tambah
+                            <i class="fa-solid fa-plus mr-2"></i>Tambah Produk
                         </button>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
+                    <div class="w-full overflow-x-auto">
+                        <table class="min-w-max w-full border-collapse">
                             <thead class="bg-gray-50 border-b-2 border-gray-200">
                                 <tr>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Produk</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Harga</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Stok</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Terjual</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
-                                    <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700">Aksi</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Produk</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Harga</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Stok</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Terjual</th>
+                                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Status</th>
+                                    <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700 whitespace-nowrap">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 <?php foreach ($myProducts as $product): ?>
-                                    <tr class="hover:bg-gray-50 transition">
+                                    <tr class="hover:bg-gray-50 transition whitespace-nowrap">
                                         <td class="px-4 py-3">
                                             <div class="flex items-center space-x-3">
                                                 <span class="text-2xl"><?= $product['image'] ?></span>
@@ -200,7 +196,13 @@ $salesStats = [
 
                 <!-- Pesanan Masuk -->
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">Pesanan Masuk</h3>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-900">Pesanan Masuk</h3>
+                        <a href="pesanan.php" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Tambah Pesanan</span>
+                        </a>
+                    </div>
                     <div class="space-y-4">
                         <?php foreach ($incomingOrders as $order): ?>
                             <div class="border border-gray-200 rounded-lg p-4 hover:border-green-300 transition">
@@ -215,18 +217,14 @@ $salesStats = [
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-lg font-bold text-green-600"><?= $order['total'] ?></span>
-                                    <?php if ($order['status'] === 'Menunggu'): ?>
-                                        <div class="space-x-2">
-                                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition">
-                                                Terima
-                                            </button>
-                                            <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition">
-                                                Tolak
-                                            </button>
-                                        </div>
-                                    <?php elseif ($order['status'] === 'Diproses'): ?>
+                                    <?php if ($order['status'] === 'Diproses'): ?>
                                         <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition">
                                             Selesai
+                                        </button>
+                                    <?php elseif ($order['status'] === 'Selesai'): ?>
+                                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition flex items-center space-x-2">
+                                            <i class="fa-solid fa-print"></i>
+                                            <span>Cetak Struk</span>
                                         </button>
                                     <?php endif; ?>
                                 </div>
@@ -250,13 +248,6 @@ $salesStats = [
                     </div>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-600">Rating</span>
-                            <div class="flex items-center text-yellow-500">
-                                <i class="fa-solid fa-star mr-1"></i>
-                                <span class="font-semibold text-gray-900">4.9</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
                             <span class="text-gray-600">Total Produk</span>
                             <span class="font-semibold text-gray-900">4</span>
                         </div>
@@ -265,9 +256,9 @@ $salesStats = [
                             <span class="font-semibold text-gray-900">280</span>
                         </div>
                     </div>
-                    <button class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-2 rounded-lg font-semibold transition">
+                    <a href="edit-profile.php" class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-2 rounded-lg font-semibold transition inline-block text-center">
                         <i class="fa-solid fa-pen-to-square mr-2"></i>Edit Profil
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Quick Stats -->
@@ -296,10 +287,6 @@ $salesStats = [
                         <button class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-chart-line"></i>
                             <span>Lihat Laporan</span>
-                        </button>
-                        <button class="w-full bg-purple-50 hover:bg-purple-100 text-purple-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
-                            <i class="fa-solid fa-file-invoice"></i>
-                            <span>Cetak Struk</span>
                         </button>
                     </div>
                 </div>

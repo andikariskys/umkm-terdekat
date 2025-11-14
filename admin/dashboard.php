@@ -65,10 +65,6 @@ $userList = [
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="p-2 hover:bg-gray-100 rounded-lg transition relative">
-                        <i class="fa-solid fa-bell text-gray-600"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                    </button>
                     <div class="flex items-center space-x-2">
                         <div class="text-right hidden sm:block">
                             <p class="font-semibold text-gray-900"><?= $user['name'] ?></p>
@@ -97,7 +93,7 @@ $userList = [
                         <i class="fa-solid fa-chart-line mr-2"></i>Lihat Laporan Lengkap
                     </button>
                 </div>
-                <div class="text-6xl mt-4 md:mt-0">⚙️</div>
+                <div class="text-6xl mt-4 md:mt-0 hidden md:block">⚙️</div>
             </div>
         </div>
 
@@ -157,11 +153,6 @@ $userList = [
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-xl font-bold text-gray-900">Kelola UMKM Terdaftar</h3>
-                        <div class="flex space-x-2">
-                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition">
-                                <i class="fa-solid fa-check mr-2"></i>Setujui Pending
-                            </button>
-                        </div>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full">
@@ -202,9 +193,15 @@ $userList = [
                                                 <button class="text-green-600 hover:bg-green-50 p-2 rounded-lg transition" title="Edit">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
-                                                <button class="text-red-600 hover:bg-red-50 p-2 rounded-lg transition" title="Nonaktifkan">
-                                                    <i class="fa-solid fa-ban"></i>
-                                                </button>
+                                                <?php if ($umkm['status'] === 'Pending'): ?>
+                                                    <button class="text-green-600 hover:bg-green-50 p-2 rounded-lg transition" title="Aktifkan">
+                                                        <i class="fa-solid fa-check-circle"></i>
+                                                    </button>
+                                                <?php else: ?>
+                                                    <button class="text-red-600 hover:bg-red-50 p-2 rounded-lg transition" title="Nonaktifkan">
+                                                        <i class="fa-solid fa-ban"></i>
+                                                    </button>
+                                                <?php endif; ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -291,7 +288,7 @@ $userList = [
             <!-- Right Content (bottom in mobile) -->
             <div class="space-y-8">
                 <!-- System Status -->
-                <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+                <!-- <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                     <h3 class="text-xl font-bold text-gray-900 mb-6">Status Sistem</h3>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
@@ -316,7 +313,7 @@ $userList = [
                             <span class="text-yellow-600 font-semibold text-sm">Progress</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Quick Actions -->
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
@@ -330,14 +327,10 @@ $userList = [
                             <i class="fa-solid fa-chart-bar"></i>
                             <span>Export Data</span>
                         </button>
-                        <button class="w-full bg-purple-50 hover:bg-purple-100 text-purple-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
-                            <i class="fa-solid fa-cog"></i>
+                        <a href="edit-profile.php" class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-gear"></i>
                             <span>Pengaturan</span>
-                        </button>
-                        <button class="w-full bg-red-50 hover:bg-red-100 text-red-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
-                            <i class="fa-solid fa-database"></i>
-                            <span>Backup System</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
 

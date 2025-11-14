@@ -244,22 +244,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <!-- Kategori Populer -->
-                <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4">Kategori Populer</h3>
-                    <div class="space-y-2">
-                        <button class="w-full text-left px-4 py-3 rounded-lg bg-gray-50 hover:bg-green-50 hover:text-green-700 transition font-medium text-sm">
-                            <i class="fa-solid fa-coffee mr-2"></i>Minuman
-                        </button>
-                        <button class="w-full text-left px-4 py-3 rounded-lg bg-gray-50 hover:bg-green-50 hover:text-green-700 transition font-medium text-sm">
-                            <i class="fa-solid fa-utensils mr-2"></i>Makanan
-                        </button>
-                        <button class="w-full text-left px-4 py-3 rounded-lg bg-gray-50 hover:bg-green-50 hover:text-green-700 transition font-medium text-sm">
-                            <i class="fa-solid fa-cookie mr-2"></i>Snack
-                        </button>
-                    </div>
-                </div>
-
                 <!-- Quick Stats -->
                 <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                     <h3 class="text-lg font-bold text-gray-900 mb-4">Produk Anda</h3>

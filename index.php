@@ -61,26 +61,10 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-16">
 
             <!-- Left: Hero Image (hidden on mobile) -->
-            <div class="hidden lg:block w-1/2">
+            <div class="hidden lg:flex w-1/2 items-center justify-center">
                 <div class="relative">
-                    <div class="absolute -top-4 -left-4 w-72 h-72 bg-green-200/40 rounded-full blur-3xl"></div>
-                    <div class="absolute -bottom-4 -right-4 w-64 h-64 bg-green-300/30 rounded-full blur-3xl"></div>
-                    <div class="relative w-full h-[500px] bg-gradient-to-br from-green-100 via-green-50 to-white rounded-3xl shadow-2xl flex items-center justify-center overflow-hidden">
-                        <div class="text-center relative z-10">
-                            <div class="text-9xl mb-6 animate-bounce">🏪</div>
-                            <div class="flex justify-center space-x-6 text-7xl mb-4">
-                                <span class="hover:scale-125 transition cursor-pointer">☕</span>
-                                <span class="hover:scale-125 transition cursor-pointer">🍜</span>
-                                <span class="hover:scale-125 transition cursor-pointer">👕</span>
-                            </div>
-                            <div class="flex justify-center space-x-6 text-6xl">
-                                <span class="hover:scale-125 transition cursor-pointer">🥔</span>
-                                <span class="hover:scale-125 transition cursor-pointer">🍞</span>
-                            </div>
-                        </div>
-                        <div class="absolute top-8 left-8 w-20 h-20 bg-green-200 rounded-full opacity-40"></div>
-                        <div class="absolute bottom-12 right-12 w-32 h-32 bg-green-300 rounded-full opacity-30"></div>
-                    </div>
+                    <img src="assets/3d-small-store.png"
+                        class="max-h-[420px] w-auto object-contain mx-auto relative z-10 drop-shadow-[0_0_60px_rgba(34,197,94,0.35)] transform-gpu transition-transform hover:scale-[1.02]" />
                 </div>
             </div>
 

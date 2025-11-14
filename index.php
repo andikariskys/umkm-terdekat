@@ -36,27 +36,21 @@
 
                 <!-- Navbar (Desktop) -->
                 <nav id="menu" class="hidden lg:flex items-center space-x-8">
-                    <a href="#beranda" class="text-gray-700 hover:text-green-600 transition font-medium">Beranda</a>
-                    <a href="#usaha" class="text-gray-700 hover:text-green-600 transition font-medium">Usaha</a>
-                    <a href="#produk" class="text-gray-700 hover:text-green-600 transition font-medium">Produk</a>
-                    <a href="#kontak" class="text-gray-700 hover:text-green-600 transition font-medium">Kontak</a>
+                    <a href="index.php" class="text-green-600 font-semibold">Beranda</a>
+                    <a href="business.php" class="text-gray-700 hover:text-green-600 transition font-medium">Usaha</a>
+                    <a href="products.php" class="text-gray-700 hover:text-green-600 transition font-medium">Produk</a>
+                    <a href="contact.php" class="text-gray-700 hover:text-green-600 transition font-medium">Kontak</a>
                     <a href="login.php" class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Login</a>
-                    <button class="p-2 hover:bg-gray-100 rounded-lg transition">
-                        <i class="fa-solid fa-bell text-gray-600"></i>
-                    </button>
-                    <button class="p-2 hover:bg-gray-100 rounded-lg transition">
-                        <i class="fa-solid fa-user text-gray-600"></i>
-                    </button>
                 </nav>
             </div>
 
             <!-- Navbar (Mobile) -->
             <div id="mobile-menu"
                 class="max-h-0 overflow-hidden opacity-0 transform scale-y-95 transition-all duration-300 ease-in-out origin-top lg:hidden flex-col space-y-2 mt-4">
-                <a href="#beranda" class="block text-gray-700 hover:text-green-600 font-medium">Beranda</a>
-                <a href="#usaha" class="block text-gray-700 hover:text-green-600 font-medium">Usaha</a>
-                <a href="#produk" class="block text-gray-700 hover:text-green-600 font-medium">Produk</a>
-                <a href="#kontak" class="block text-gray-700 hover:text-green-600 font-medium">Kontak</a>
+                <a href="index.php" class="block text-green-600 font-semibold">Beranda</a>
+                <a href="business.php" class="block text-gray-700 hover:text-green-600 font-medium">Usaha</a>
+                <a href="products.php" class="block text-gray-700 hover:text-green-600 font-medium">Produk</a>
+                <a href="contact.php" class="block text-gray-700 hover:text-green-600 font-medium">Kontak</a>
                 <a href="login.php" class="block text-gray-700 hover:text-green-600 font-medium">Login</a>
             </div>
         </div>
@@ -104,13 +98,13 @@
 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                    <button class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
-                        <span>Jelajahi UMKM Terdekat</span>
-                        <i class="fa-solid fa-bag-shopping w-5 h-5"></i>
-                    </button>
-                    <button class="border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-4 rounded-xl text-lg font-semibold transition">
+                    <a href="register.php" role="button" class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                        <span>Daftar UMKMTerdekat</span>
+                        <i class="fa-solid fa-store w-5 h-5"></i>
+                    </a>
+                    <a href="contacts.php" role="button" class="border-2 border-green-600 text-green-600 hover:bg-green-50 px-8 py-4 rounded-xl text-lg font-semibold transition">
                         Pelajari Lebih Lanjut
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Stats -->
@@ -148,12 +142,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                 <?php
                 $businesses = [
-                    ['name' => 'Warung Kopi Seduh', 'address' => 'Jl. Raya No. 12, Serang', 'image' => '☕', 'category' => 'F&B'],
-                    ['name' => 'Toko Kelontong Berkah', 'address' => 'Jl. Pasar No. 45, Serang', 'image' => '🏪', 'category' => 'Retail'],
-                    ['name' => 'Sablon Kreatif', 'address' => 'Jl. Industri No. 8, Serang', 'image' => '👕', 'category' => 'Jasa'],
-                    ['name' => 'Keripik Singkong Renyah', 'address' => 'Jl. Sudirman No. 23, Serang', 'image' => '🥔', 'category' => 'F&B'],
-                    ['name' => 'Bakso Mas Anto', 'address' => 'Jl. Merdeka No. 67, Serang', 'image' => '🍜', 'category' => 'F&B'],
-                    ['name' => 'Roti Mama', 'address' => 'Jl. Melati No. 23, Serang', 'image' => '🍞', 'category' => 'F&B'],
+                    ['id' => 0, 'name' => 'Sablon Kreatif', 'address' => 'Jl. Industri No. 8, Serang', 'image' => '👕', 'category' => 'Jasa'],
+                    ['id' => 1, 'name' => 'Keripik Singkong Renyah', 'address' => 'Jl. Sudirman No. 23, Serang', 'image' => '🥔', 'category' => 'F&B'],
+                    ['id' => 2, 'name' => 'Warung Kopi Seduh', 'address' => 'Jl. Raya No. 12, Serang', 'image' => '☕', 'category' => 'F&B'],
+                    ['id' => 3, 'name' => 'Toko Kelontong Berkah', 'address' => 'Jl. Pasar No. 45, Serang', 'image' => '🏪', 'category' => 'Retail'],
+                    ['id' => 4, 'name' => 'Bakso Mas Anto', 'address' => 'Jl. Merdeka No. 67, Serang', 'image' => '🍜', 'category' => 'F&B'],
+                    ['id' => 5, 'name' => 'Roti Mama', 'address' => 'Jl. Melati No. 23, Serang', 'image' => '🍞', 'category' => 'F&B'],
                 ];
                 foreach ($businesses as $b): ?>
                     <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 p-6 text-center border border-gray-100 hover:border-green-200 transform hover:-translate-y-1">
@@ -167,9 +161,9 @@
                         <p class="text-gray-500 text-sm mb-4 flex items-center justify-center">
                             <i class="fa-solid fa-location-dot mr-2"></i> <?= $b['address'] ?>
                         </p>
-                        <button class="w-full bg-green-50 hover:bg-green-600 hover:text-white text-green-700 py-2.5 rounded-lg text-sm font-semibold transition-all">
+                        <a href="business_profile.php?id=<?= urlencode($b['id']) ?>" role="button" class="w-full inline-block bg-green-50 hover:bg-green-600 hover:text-white text-green-700 py-2.5 rounded-lg text-sm font-semibold transition-all text-center">
                             Buka Profil
-                        </button>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -189,25 +183,25 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 <?php
                 $products = [
-                    ['name' => 'Sablon Kaos Custom Premium', 'price' => 'Rp 50.000', 'image' => '👕', 'seller' => 'Sablon Kreatif'],
-                    ['name' => 'Keripik Singkong Original', 'price' => 'Rp 15.000', 'image' => '🥔', 'seller' => 'Keripik Renyah'],
-                    ['name' => 'Kopi Arabika Lokal Premium', 'price' => 'Rp 25.000', 'image' => '☕', 'seller' => 'Warung Kopi Seduh'],
-                    ['name' => 'Tas Rajut Handmade', 'price' => 'Rp 75.000', 'image' => '👜', 'seller' => 'Rajut Cantik'],
-                    ['name' => 'Roti Manis Coklat Lembut', 'price' => 'Rp 12.000', 'image' => '🍞', 'seller' => 'Roti Mama'],
-                    ['name' => 'Nasi Goreng Spesial', 'price' => 'Rp 18.000', 'image' => '🍛', 'seller' => 'Nasi Goreng Enak'],
+                    ['id' => 0, 'name' => 'Sablon Kaos Custom Premium', 'price' => 'Rp 50.000', 'image' => '👕', 'seller' => 'Sablon Kreatif'],
+                    ['id' => 1, 'name' => 'Keripik Singkong Original', 'price' => 'Rp 15.000', 'image' => '🥔', 'seller' => 'Keripik Renyah'],
+                    ['id' => 2, 'name' => 'Kopi Arabika Lokal Premium', 'price' => 'Rp 25.000', 'image' => '☕', 'seller' => 'Warung Kopi Seduh'],
+                    ['id' => 3, 'name' => 'Tas Rajut Handmade', 'price' => 'Rp 75.000', 'image' => '👜', 'seller' => 'Rajut Cantik'],
+                    ['id' => 4, 'name' => 'Roti Manis Coklat Lembut', 'price' => 'Rp 12.000', 'image' => '🍞', 'seller' => 'Roti Mama'],
+                    ['id' => 5, 'name' => 'Nasi Goreng Spesial', 'price' => 'Rp 18.000', 'image' => '🍛', 'seller' => 'Nasi Goreng Enak'],
                 ];
                 foreach ($products as $p): ?>
                     <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
                         <div class="aspect-[4/3] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-8xl transition-transform duration-300">
-                            <?= $p['image'] ?>
+                            <?= htmlspecialchars($p['image'], ENT_QUOTES, 'UTF-8') ?>
                         </div>
                         <div class="p-5">
-                            <div class="text-xs text-gray-500 mb-2"><?= $p['seller'] ?></div>
-                            <h4 class="font-semibold text-gray-900 mb-2 text-base"><?= $p['name'] ?></h4>
-                            <p class="text-green-600 font-bold text-xl mb-4"><?= $p['price'] ?></p>
-                            <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                            <div class="text-xs text-gray-500 mb-2"><?= htmlspecialchars($p['seller'], ENT_QUOTES, 'UTF-8') ?></div>
+                            <h4 class="font-semibold text-gray-900 mb-2 text-base"><?= htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8') ?></h4>
+                            <p class="text-green-600 font-bold text-xl mb-4"><?= htmlspecialchars($p['price'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <a href="detail_product.php?id=<?= urlencode($p['id']) ?>" class="w-full inline-block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg text-center">
                                 Lihat Detail
-                            </button>
+                            </a>
                         </div>
                     </div>
                 <?php endforeach; ?>

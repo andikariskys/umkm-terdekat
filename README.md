@@ -18,11 +18,13 @@ Manfaat untuk UMKM
 
 Cara cepat mulai (pengembang)
 1. Clone repository ke environment pengembangan (mis. Laragon).
-2. Salin file `.env.example` menjadi `.env` lali modifikasi pada database
+2. Salin file `.env.example` menjadi `.env` lalu modifikasi value pada database
 3. Jalankan perintah `composer i` untuk menginstall dependency yang dibutuhkan
 5. Jalankan perintah `php artisan migrate` untuk melakukan migrasi database
-6. Jalankan aplikasi dengan perintah `php artisan serve`
-7. Buka aplikasi di browser.
+6. Jalankan perintah `php artisan key:generate` untuk membuat kunci aplikasi
+7. Jalanakn perintah `php artisan storage:link` untuk membuat link ke directory publik
+8. Jalankan aplikasi dengan perintah `php artisan serve`
+9. Buka dan jalankan aplikasi di browser.
 
 Lisensi
 - Free for commercial use

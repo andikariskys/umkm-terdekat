@@ -10,7 +10,7 @@ $businesses = [
 ];
 
 // Choose business by ?id (default 0)
-$selectedId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$selectedId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $selected = null;
 foreach ($businesses as $b) {
     if ($b['id'] === $selectedId) {
@@ -24,70 +24,9 @@ if ($selected === null) {
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        <?= htmlspecialchars($selected['name']) ?> — Profil Bisnis — UMKMTerdekat
-    </title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js" crossorigin="anonymous">
-    </script>
-</head>
-
-<body class="min-h-screen bg-gray-50 font-sans">
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="bg-green-600 p-2 rounded-xl">
-                        <i class="fa-solid fa-store text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-green-700">UMKMTerdekat</h1>
-                        <p class="text-xs text-gray-500">Dukung Usaha Lokal</p>
-                    </div>
-                </div>
-
-                <button id="menu-btn" class="lg:hidden text-gray-600 text-2xl focus:outline-none">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-
-                <nav id="menu" class="hidden lg:flex items-center space-x-8">
-                    <a href="{{ route('home') }}"
-                        class="text-gray-700 hover:text-green-600 transition font-medium">Beranda</a>
-                    <a href="{{ route('business') }}"
-                        class="text-gray-700 hover:text-green-600 transition font-medium">Usaha</a>
-                    <a href="{{ route('products') }}"
-                        class="text-gray-700 hover:text-green-600 transition font-medium">Produk</a>
-                    <a href="{{ route('contact') }}"
-                        class="text-gray-700 hover:text-green-600 transition font-medium">Kontak</a>
-                    <a href="{{ route('login') }}"
-                        class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Login</a>
-                </nav>
-            </div>
-
-            <div id="mobile-menu"
-                class="max-h-0 overflow-hidden opacity-0 transform scale-y-95 transition-all duration-300 ease-in-out origin-top lg:hidden flex-col space-y-2 mt-4">
-                <a href="{{ route('home') }}" class="block text-gray-700 hover:text-green-600 font-medium">Beranda</a>
-                <a href="{{ route('business') }}" class="block text-gray-700 hover:text-green-600 font-medium">Usaha</a>
-                <a href="{{ route('products') }}"
-                    class="block text-gray-700 hover:text-green-600 font-medium">Produk</a>
-                <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-green-600 font-medium">Kontak</a>
-                <a href="{{ route('login') }}" class="block text-gray-700 hover:text-green-600 font-medium">Login</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Business Profile -->
+@extends('templates.anonymous')
+@section('title', 'Profil Usaha - ' . $selected['name'])
+@section('content')
     <main class="py-12">
         <div class="max-w-6xl mx-auto px-6">
             <nav class="text-sm text-gray-500 mb-6">
@@ -196,13 +135,7 @@ if ($selected === null) {
 
             <!-- Produk Toko (static sample data) -->
             <?php
-            $products = [
-                ['id' => 0, 'name' => 'Kaos Sablon Custom', 'price' => 'Rp 70.000', 'image' => '👕', 'desc' => 'Kaos cotton combed 20s, sablon manual. Minimum 1 pcs.'],
-                ['id' => 1, 'name' => 'Paket Keripik 500gr', 'price' => 'Rp 25.000', 'image' => '🥔', 'desc' => 'Keripik singkong renyah, tanpa pengawet, cocok untuk oleh-oleh.'],
-                ['id' => 2, 'name' => 'Kopi Kemasan 250gr', 'price' => 'Rp 50.000', 'image' => '☕', 'desc' => 'Biji Arabika medium roast, cocok untuk espresso dan manual brew.'],
-                ['id' => 3, 'name' => 'Gula Premium 1000gr', 'price' => 'Rp 20.000', 'image' => '🍬', 'desc' => 'Gula premium berkualitas tinggi, cocok untuk kebutuhan rumah tangga dan usaha.'],
-                ['id' => 4, 'name' => 'Bakso Spesial', 'price' => 'Rp 40.000', 'image' => '🍜', 'desc' => 'Bakso kenyal dengan kuah gurih, tersedia dalam paket keluarga.'],
-            ];
+            $products = [['id' => 0, 'name' => 'Kaos Sablon Custom', 'price' => 'Rp 70.000', 'image' => '👕', 'desc' => 'Kaos cotton combed 20s, sablon manual. Minimum 1 pcs.'], ['id' => 1, 'name' => 'Paket Keripik 500gr', 'price' => 'Rp 25.000', 'image' => '🥔', 'desc' => 'Keripik singkong renyah, tanpa pengawet, cocok untuk oleh-oleh.'], ['id' => 2, 'name' => 'Kopi Kemasan 250gr', 'price' => 'Rp 50.000', 'image' => '☕', 'desc' => 'Biji Arabika medium roast, cocok untuk espresso dan manual brew.'], ['id' => 3, 'name' => 'Gula Premium 1000gr', 'price' => 'Rp 20.000', 'image' => '🍬', 'desc' => 'Gula premium berkualitas tinggi, cocok untuk kebutuhan rumah tangga dan usaha.'], ['id' => 4, 'name' => 'Bakso Spesial', 'price' => 'Rp 40.000', 'image' => '🍜', 'desc' => 'Bakso kenyal dengan kuah gurih, tersedia dalam paket keluarga.']];
             ?>
             <section id="produk" class="mt-12">
                 <div class="flex items-center justify-between mb-6">
@@ -238,98 +171,4 @@ if ($selected === null) {
             </section></a>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer id="kontak" class="bg-gradient-to-br from-green-600 to-green-700 text-white py-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="bg-white p-2 rounded-xl">
-                            <i class="fa-solid fa-store text-green-600 text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold">UMKMTerdekat</h4>
-                            <p class="text-green-100 text-xs">Dukung Usaha Lokal</p>
-                        </div>
-                    </div>
-                    <p class="text-green-100 leading-relaxed text-sm">Platform terpercaya untuk menemukan dan mendukung
-                        UMKM lokal di seluruh Indonesia</p>
-                </div>
-
-                <div>
-                    <h5 class="font-bold text-lg mb-4">Tentang Kami</h5>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-green-100 hover:text-white transition">Tentang Platform</a></li>
-                        <li><a href="#" class="text-green-100 hover:text-white transition">Cara Kerja</a></li>
-                        <li><a href="#" class="text-green-100 hover:text-white transition">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h5 class="font-bold text-lg mb-4">Hubungi Kami</h5>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex items-center space-x-3">
-                            <div class="bg-green-500 p-2 rounded-lg">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div>
-                                <div class="text-sm text-green-100">WhatsApp</div>
-                                <div class="font-semibold">+62 812-3456-7890</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="bg-green-500 p-2 rounded-lg">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div>
-                                <div class="text-sm text-green-100">Email</div>
-                                <div class="font-semibold">info@umkmterdekat.com</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h5 class="font-bold text-lg mb-4">Ikuti Kami</h5>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-2 rounded-lg">
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
-                        <div>
-                            <div class="text-sm text-green-100">Instagram</div>
-                            <div class="font-semibold">@umkmterdekat</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-green-500 pt-6 text-center text-green-100 text-sm">
-                &copy;
-                <?= date('Y') ?> <strong>UMKMTerdekat</strong>. Semua Hak Dilindungi.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Mobile Menu Script -->
-    <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        let menuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            menuOpen = !menuOpen;
-
-            if (menuOpen) {
-                mobileMenu.classList.remove('max-h-0', 'opacity-0', 'scale-y-95');
-                mobileMenu.classList.add('max-h-96', 'opacity-100', 'scale-y-100');
-            } else {
-                mobileMenu.classList.add('max-h-0', 'opacity-0', 'scale-y-95');
-                mobileMenu.classList.remove('max-h-96', 'opacity-100', 'scale-y-100');
-            }
-        });
-    </script>
-</body>
-
-</html>
+@endsection

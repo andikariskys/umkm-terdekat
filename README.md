@@ -7,24 +7,31 @@ Fitur utama
 - Pendaftaran & profil usaha (foto, deskripsi, dll)
 - Pencarian berdasarkan lokasi dan kategori
 - Peta interaktif dan rute menuju usaha
-- Promosi, diskon, dan fitur kupon
-- Notifikasi untuk pelanggan (promo baru, event)
-- Statistik dasar: kunjungan, permintaan kontak, penjualan
-- Integrasi metode kontak (telepon, WhatsApp, media sosial)
 - Manajemen produk dan stok sederhana
+- Kasir sederhana & Statistik dasar penjualan
+- Integrasi metode kontak (telepon, WhatsApp, media sosial)
 
 Manfaat untuk UMKM
 - Meningkatkan jangkauan pelanggan lokal
 - Mempermudah pelanggan menemukan dan menghubungi usaha
 - Menyediakan alat promosi tanpa biaya pemasaran besar
-- Memberi wawasan dasar untuk pengambilan keputusan
 
 Cara cepat mulai (pengembang)
-1. Clone repository ke environment pengembangan (mis. Laragon).  
-2. Jalankan server lokal dan buka aplikasi di browser.
+1. Clone repository ke environment pengembangan (mis. Laragon).
+2. Salin file `.env.example` menjadi `.env` lali modifikasi pada database
+3. Jalankan perintah `composer i` untuk menginstall dependency yang dibutuhkan
+5. Jalankan perintah `php artisan migrate` untuk melakukan migrasi database
+6. Jalankan aplikasi dengan perintah `php artisan serve`
+7. Buka aplikasi di browser.
 
 Lisensi
-- Lisensi bebas (sesuaikan sesuai kebutuhan proyek).
+- Free for commercial use
+
+Arsitektur Sistem
+- FullStack: Laravel 12
+- Template: TailwindCSS
+- Database: MySQL
+- Library: tarfin-labs/laravel-spatial & Leaflet.js
 
 Kontak / kontribusi  
 Untuk kontribusi atau pertanyaan, tambahkan issue atau pull request pada repository ini.

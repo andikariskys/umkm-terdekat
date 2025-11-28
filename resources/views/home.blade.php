@@ -44,16 +44,16 @@
                 <div
                     class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-6 sm:space-y-0 sm:space-x-12 pt-6 border-t border-gray-200">
                     <div class="text-center lg:text-left">
-                        <div class="text-3xl font-bold text-green-600">500+</div>
+                        <div class="text-3xl font-bold text-green-600">{{ $countUmkm }}</div>
                         <div class="text-gray-600">UMKM Terdaftar</div>
                     </div>
                     <div class="text-center lg:text-left">
-                        <div class="text-3xl font-bold text-green-600">2000+</div>
+                        <div class="text-3xl font-bold text-green-600">{{ $countProducts }}</div>
                         <div class="text-gray-600">Produk & Jasa</div>
                     </div>
                     <div class="text-center lg:text-left">
-                        <div class="text-3xl font-bold text-green-600">5000+</div>
-                        <div class="text-gray-600">Pengguna Aktif</div>
+                        <div class="text-3xl font-bold text-green-600">{{ $countOrdersToday }}</div>
+                        <div class="text-gray-600">Transaksi Hari Ini</div>
                     </div>
                 </div>
             </div>
@@ -75,40 +75,52 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <?php
-                $businesses = [
-                    ['id' => 0, 'name' => 'Sablon Kreatif', 'address' => 'Jl. Industri No. 8, Serang', 'image' => '👕', 'category' => 'Jasa'],
-                    ['id' => 1, 'name' => 'Keripik Singkong Renyah', 'address' => 'Jl. Sudirman No. 23, Serang', 'image' => '🥔', 'category' => 'F&B'],
-                    ['id' => 2, 'name' => 'Warung Kopi Seduh', 'address' => 'Jl. Raya No. 12, Serang', 'image' => '☕', 'category' => 'F&B'],
-                    ['id' => 3, 'name' => 'Toko Kelontong Berkah', 'address' => 'Jl. Pasar No. 45, Serang', 'image' => '🏪', 'category' => 'Retail'],
-                    ['id' => 4, 'name' => 'Bakso Mas Anto', 'address' => 'Jl. Merdeka No. 67, Serang', 'image' => '🍜', 'category' => 'F&B'],
-                    ['id' => 5, 'name' => 'Roti Mama', 'address' => 'Jl. Melati No. 23, Serang', 'image' => '🍞', 'category' => 'F&B'],
-                ];
-                foreach ($businesses as $b): ?>
-                <div
-                    class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 p-6 text-center border border-gray-100 hover:border-green-200 transform hover:-translate-y-1">
+                @forelse ($umkmList as $umkm)
                     <div
-                        class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center text-5xl shadow-lg">
-                        <?= $b['image'] ?>
+                        class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 p-6 text-center border border-gray-100 hover:border-green-200 transform hover:-translate-y-1">
+
+                        {{-- Foto / Emoji --}}
+                        <div
+                            class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center text-5xl shadow-lg">
+                            @if ($umkm->business_photo)
+                                <img src="{{ asset('storage/' . $umkm->business_photo) }}" alt="{{ $umkm->business ?? $umkm->name }}"
+                                    class="w-full h-full object-cover rounded-full">
+                            @else
+                                {{ $umkm->emoji ?? '🏪' }}
+                            @endif
+                        </div>
+
+                        {{-- Kategori --}}
+                        <div class="mb-2">
+                            <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
+                                {{ $umkm->category ?? 'UMKM' }}
+                            </span>
+                        </div>
+
+                        {{-- Nama UMKM --}}
+                        <h4 class="font-semibold text-gray-900 mb-2 text-base">
+                            {{ $umkm->business ?? $umkm->name }}
+                        </h4>
+
+                        {{-- Alamat --}}
+                        <p class="text-gray-500 text-sm mb-4 flex items-center justify-center">
+                            <i class="fa-solid fa-location-dot mr-2"></i>
+                            {{ $umkm->address ?? 'Alamat tidak tersedia' }}
+                        </p>
+
+                        {{-- Tombol Profil --}}
+                        <a href="{{ route('business.profile', $umkm->id) }}"
+                            class="w-full inline-block bg-green-50 hover:bg-green-600 hover:text-white text-green-700 py-2.5 rounded-lg text-sm font-semibold transition-all text-center">
+                            Buka Profil
+                        </a>
                     </div>
-                    <div class="mb-2">
-                        <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
-                            <?= $b['category'] ?>
-                        </span>
+
+                @empty
+                    <div class="col-span-6 text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+                        <i class="fa-solid fa-store text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-gray-500">Belum ada UMKM terdaftar.</p>
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-2 text-base">
-                        <?= $b['name'] ?>
-                    </h4>
-                    <p class="text-gray-500 text-sm mb-4 flex items-center justify-center">
-                        <i class="fa-solid fa-location-dot mr-2"></i>
-                        <?= $b['address'] ?>
-                    </p>
-                    <a href="{{ route('business-profile') }}?id=<?= urlencode($b['id']) ?>"
-                        class="w-full inline-block bg-green-50 hover:bg-green-600 hover:text-white text-green-700 py-2.5 rounded-lg text-sm font-semibold transition-all text-center">
-                        Buka Profil
-                    </a>
-                </div>
-                <?php endforeach; ?>
+                @endforelse
             </div>
         </div>
     </section>
@@ -119,46 +131,57 @@
             <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 text-center sm:text-left">
                 <div>
                     <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Produk & Jasa Unggulan</h3>
-                    <p class="text-gray-600 text-base md:text-lg">Temukan produk dan jasa berkualitas dari UMKM lokal
+                    <p class="text-gray-600 text-base md:text-lg">
+                        Temukan produk dan jasa berkualitas dari UMKM lokal
                     </p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <?php
-                $products = [
-                    ['id' => 0, 'name' => 'Sablon Kaos Custom Premium', 'price' => 'Rp 50.000', 'image' => '👕', 'seller' => 'Sablon Kreatif'],
-                    ['id' => 1, 'name' => 'Keripik Singkong Original', 'price' => 'Rp 15.000', 'image' => '🥔', 'seller' => 'Keripik Renyah'],
-                    ['id' => 2, 'name' => 'Kopi Arabika Lokal Premium', 'price' => 'Rp 25.000', 'image' => '☕', 'seller' => 'Warung Kopi Seduh'],
-                    ['id' => 3, 'name' => 'Tas Rajut Handmade', 'price' => 'Rp 75.000', 'image' => '👜', 'seller' => 'Rajut Cantik'],
-                    ['id' => 4, 'name' => 'Roti Manis Coklat Lembut', 'price' => 'Rp 12.000', 'image' => '🍞', 'seller' => 'Roti Mama'],
-                    ['id' => 5, 'name' => 'Nasi Goreng Spesial', 'price' => 'Rp 18.000', 'image' => '🍛', 'seller' => 'Nasi Goreng Enak'],
-                ];
-                foreach ($products as $p): ?>
-                <div
-                    class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
+                @forelse ($products as $p)
                     <div
-                        class="aspect-[4/3] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-8xl transition-transform duration-300">
-                        <?= htmlspecialchars($p['image'], ENT_QUOTES, 'UTF-8') ?>
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs text-gray-500 mb-2">
-                            <?= htmlspecialchars($p['seller'], ENT_QUOTES, 'UTF-8') ?>
+                        class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
+
+                        {{-- Gambar Produk --}}
+                        <div
+                            class="aspect-[4/3] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-8xl transition-transform duration-300">
+                            @if ($p->image)
+                                <img src="{{ asset('storage/' . $p->image) }}" alt="{{ $p->name }}"
+                                    class="h-full w-full object-cover">
+                            @else
+                                {{-- Pakai emoji jika tidak ada gambar --}}
+                                {{ $p->emoji ?? '🛍️' }}
+                            @endif
                         </div>
-                        <h4 class="font-semibold text-gray-900 mb-2 text-base">
-                            <?= htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8') ?>
-                        </h4>
-                        <p class="text-green-600 font-bold text-xl mb-4">
-                            <?= htmlspecialchars($p['price'], ENT_QUOTES, 'UTF-8') ?>
-                        </p>
-                        <a href="{{ route('detail-product') }}?id=<?= urlencode($p['id']) ?>"
-                            class="w-full inline-block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg text-center">
-                            Lihat Detail
-                        </a>
+
+                        <div class="p-5">
+                            <div class="text-xs text-gray-500 mb-2">
+                                {{ $p->seller_name ?? 'UMKM Lokal' }}
+                            </div>
+
+                            <h4 class="font-semibold text-gray-900 mb-2 text-base">
+                                {{ $p->name }}
+                            </h4>
+
+                            <p class="text-green-600 font-bold text-xl mb-4">
+                                Rp {{ number_format($p->price, 0, ',', '.') }}
+                            </p>
+
+                            <a href="{{ route('product.detail', $p->id) }}"
+                                class="w-full inline-block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg text-center">
+                                Lihat Detail
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <?php endforeach; ?>
+
+                @empty
+                    <div class="col-span-3 text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+                        <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-gray-500">Belum ada produk tersedia.</p>
+                    </div>
+                @endforelse
             </div>
+
             <div class="text-center mt-12">
                 <a href="{{ route('products') }}"
                     class="bg-white hover:bg-green-50 text-green-600 border-2 border-green-600 px-10 py-4 rounded-xl font-semibold text-lg transition-all shadow-md hover:shadow-lg">

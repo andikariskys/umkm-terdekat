@@ -7,34 +7,20 @@ use App\Http\Controllers\Owner\ProductController;
 use App\Http\Controllers\Owner\ProfileController;
 use App\Http\Controllers\Owner\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\VisitorController;
 
-// ===== HALAMAN UTAMA =====
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-// ===== HALAMAN PRODUK =====
-Route::get('/products', function () {
-    return view('products');
-})->name('products');
-
+// Halaman Pengunjung
+Route::get('/', [VisitorController::class, 'index'])->name('home');
+Route::get('/products', [VisitorController::class, 'products'])->name('products');
 Route::get('/detail-product', function () {
     return view('detail_product');
-})->name('detail-product');
-
-// ===== HALAMAN USAHA/BISNIS =====
-Route::get('/business', function () {
-    return view('business');
-})->name('business');
-
+})->name('product.detail');
+Route::get('/business', [VisitorController::class, 'business'])->name('business');
 Route::get('/business-profile', function () {
     return view('business_profile');
-})->name('business-profile');
-
-// ===== HALAMAN KONTAK =====
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+})->name('business.profile');
+Route::get('/contact', [VisitorController::class, 'contact'])->name('contact');
 
 // ===== AUTHENTICATION ROUTES =====
 // Login
@@ -45,13 +31,9 @@ Route::post('/auth/login', [AuthenticatedSessionController::class, 'store'])
     ->name('login.store');
 
 // Register
-Route::get('/auth/register', function () {
-    return view('auth.register');
-})->name('register');
+Route::get('/auth/register', [RegisterController::class, 'index'])->name('register');
 
-Route::post('/auth/register', function () {
-    return view('auth.register');
-})->name('register.store');
+Route::post('/auth/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Logout (harus login)
 Route::middleware('auth')->group(function () {

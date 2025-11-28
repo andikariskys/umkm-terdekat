@@ -1,20 +1,9 @@
-<?php
-// {{ route('products') }}
-$products = [
-    ['id' => 0, 'name' => 'Kopi Arabika 250g', 'price' => 'Rp35.000', 'image' => '☕', 'category' => 'F&B', 'seller' => 'Warung Kopi Seduh', 'description' => 'Kopi arabika sangrai medium roast, aroma wangi.'],
-    ['id' => 1, 'name' => 'Roti Tawar 1kg', 'price' => 'Rp20.000', 'image' => '🍞', 'category' => 'F&B', 'seller' => 'Roti Mama', 'description' => 'Roti harian, empuk dan segar.'],
-    ['id' => 2, 'name' => 'Kaos Custom Sablon', 'price' => 'Rp60.000', 'image' => '👕', 'category' => 'Retail', 'seller' => 'Sablon Kreatif', 'description' => 'Kaos katun 100% - desain custom.'],
-    ['id' => 3, 'name' => 'Keripik Singkong 200g', 'price' => 'Rp12.000', 'image' => '🥔', 'category' => 'F&B', 'seller' => 'Keripik Singkong Renyah', 'description' => 'Renah, gurih, tanpa pengawet.'],
-    ['id' => 4, 'name' => 'Bakso 10 pcs', 'price' => 'Rp25.000', 'image' => '🍜', 'category' => 'F&B', 'seller' => 'Bakso Mas Anto', 'description' => 'Bakso sapi original, cocok untuk keluarga.'],
-    ['id' => 5, 'name' => 'Paket Sembako Mini', 'price' => 'Rp75.000', 'image' => '🛒', 'category' => 'Retail', 'seller' => 'Toko Kelontong Berkah', 'description' => 'Berisi beras, minyak, gula, dan kebutuhan pokok.'],
-];
-?>
-
 @extends('templates.anonymous')
 
 @section('title', 'Produk')
 
 @section('content')
+@use('\Illuminate\Support\Str')
     <main class="py-12">
         <div class="max-w-7xl mx-auto px-6 mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
@@ -65,37 +54,52 @@ $products = [
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <?php foreach ($products as $p): ?>
-                <div
-                    class="bg-white rounded-2xl shadow-md p-6 border border-gray-100 hover:shadow-2xl transition transform hover:-translate-y-1">
-                    <div
-                        class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center text-4xl shadow-lg">
-                        <?= htmlspecialchars($p['image'], ENT_QUOTES, 'UTF-8') ?>
+                @forelse ($products as $p)
+                    <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
+
+                        {{-- Gambar Produk --}}
+                        <div
+                            class="aspect-[4/3] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-8xl transition-transform duration-300">
+                            @if ($p->image)
+                                <img src="{{ asset('storage/' . $p->image) }}" alt="{{ $p->name }}"
+                                    class="h-full w-full object-cover">
+                            @else
+                                {{-- Pakai emoji jika tidak ada gambar --}}
+                                {{ $p->emoji ?? '🛍️' }}
+                            @endif
+                        </div>
+
+                        <div class="text-center mb-2 p-5">
+                            <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">{{ $p->category }}</span>
+                            <h4 class="font-semibold text-gray-900 mb-2 text-base">
+                                {{ $p->name }}
+                            </h4>
+
+                            <p class="text-green-600 font-bold text-lg mb-4">
+                                Rp {{ number_format($p->price, 0, ',', '.') }}
+                            </p>
+
+                            <div class="text-sm text-gray-500 mb-2">
+                                <i class="fa-solid fa-shop"></i> {{ $p->owner_name }}
+                            </div>
+
+                            <p class="text-gray-500 text-sm mb-3">
+                                {{ Str::limit($p->description, 60, '...') }}
+                            </p>
+
+                            <a href="{{ route('product.detail', $p->id) }}"
+                                class="w-full inline-block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg text-center">
+                                Lihat Detail
+                            </a>
+                        </div>
                     </div>
-                    <div class="text-center mb-2">
-                        <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">
-                            <?= htmlspecialchars($p['category'], ENT_QUOTES, 'UTF-8') ?>
-                        </span>
+
+                @empty
+                    <div class="col-span-3 text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+                        <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-gray-500">Belum ada produk tersedia.</p>
                     </div>
-                    <h3 class="font-semibold text-gray-900 mb-1 text-lg text-center">
-                        <?= htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8') ?>
-                    </h3>
-                    <p class="text-green-600 font-bold text-center">
-                        <?= htmlspecialchars($p['price'], ENT_QUOTES, 'UTF-8') ?>
-                    </p>
-                    <p class="text-gray-500 text-sm mb-3 text-center"><i class="fa-solid fa-shop mr-2"></i>
-                        <?= htmlspecialchars($p['seller'], ENT_QUOTES, 'UTF-8') ?>
-                    </p>
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-                        <?= htmlspecialchars($p['description'], ENT_QUOTES, 'UTF-8') ?>
-                    </p>
-                    <div class="mt-4">
-                        <a href="{{ route('detail-product') }}?id=<?= urlencode($p['id']) ?>"
-                            class="w-full inline-block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold text-center">Lihat
-                            Produk</a>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+                @endforelse
             </div>
         </div>
     </main>

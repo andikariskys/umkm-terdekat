@@ -91,6 +91,7 @@
                 </div>
 
                 <div class="space-y-3">
+                    <input type="hidden" name="csrf-token" value="{{ csrf_token() }}">
                     <button id="clearCartBtn"
                         class="w-full bg-red-50 hover:bg-red-100 text-red-700 py-2 rounded-lg font-semibold text-sm transition">
                         <i class="fa-solid fa-trash mr-2"></i>Kosongkan
@@ -230,8 +231,8 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content')
+                        'X-CSRF-TOKEN': document.querySelector('input[name="csrf-token"]').getAttribute(
+                            'value')
                     },
                     body: JSON.stringify({
                         customer_name: name,

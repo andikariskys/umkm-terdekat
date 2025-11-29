@@ -21,7 +21,7 @@ class AdminController extends Controller
         $platformStats = [
             'totalUMKM' => User::where('role', 'owner')->count(),
             'totalProducts' => Product::count(),
-            'totalUsers' => User::where('role', 'user')->count(),
+            'totalUsers' => User::where('role', 'owner')->where('status', 'active')->count(),
             'totalTransactions' => Order::count(),
             'revenue' => 'Rp ' . number_format($revenueRaw, 0, ',', '.')
         ];

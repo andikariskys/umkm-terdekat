@@ -93,19 +93,19 @@
                         {{-- Kategori --}}
                         <div class="mb-2">
                             <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
-                                {{ $umkm->category ?? 'UMKM' }}
+                                {{ $umkm->business_category ?? 'UMKM' }}
                             </span>
                         </div>
 
                         {{-- Nama UMKM --}}
                         <h4 class="font-semibold text-gray-900 mb-2 text-base">
-                            {{ $umkm->business ?? $umkm->name }}
+                            {{ $umkm->business_name }}
                         </h4>
 
                         {{-- Alamat --}}
                         <p class="text-gray-500 text-sm mb-4 flex items-center justify-center">
                             <i class="fa-solid fa-location-dot mr-2"></i>
-                            {{ $umkm->address ?? 'Alamat tidak tersedia' }}
+                            {{ $umkm->business_address }}
                         </p>
 
                         {{-- Tombol Profil --}}

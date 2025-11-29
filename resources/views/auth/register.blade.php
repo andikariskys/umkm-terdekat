@@ -170,10 +170,15 @@
                                 <label class="block text-gray-700 font-semibold mb-2" for="business_category">
                                     <i class="fa-solid fa-tags mr-2"></i>Kategori
                                 </label>
-                                <input type="text" id="business_category" name="business_category"
-                                    value="{{ old('business_category') }}"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                                    placeholder="Mis: Makanan, Fashion, Jasa, dsb.">
+                                <select id="business_category" name="business_category" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                                    <option value="">Pilih Kategori</option>
+                                    @foreach (['F&B', 'Fashion', 'Kerajinan', 'Elektronik', 'Jasa', 'Pertanian', 'Lainnya'] as $cat)
+                                        <option value="{{ $cat }}">
+                                            {{ $cat }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

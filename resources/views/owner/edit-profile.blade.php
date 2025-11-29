@@ -57,7 +57,7 @@
                         <select id="business_category" name="business_category" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                             <option value="">Pilih Kategori</option>
-                            @foreach (['Makanan & Minuman', 'Fashion', 'Kerajinan', 'Elektronik', 'Jasa', 'Pertanian', 'Lainnya'] as $cat)
+                            @foreach (['F&B', 'Fashion', 'Kerajinan', 'Elektronik', 'Jasa', 'Pertanian', 'Lainnya'] as $cat)
                                 <option value="{{ $cat }}"
                                     {{ old('business_category', $user->business_category) == $cat ? 'selected' : '' }}>
                                     {{ $cat }}

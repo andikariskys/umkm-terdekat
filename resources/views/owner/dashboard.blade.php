@@ -75,11 +75,18 @@
             <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-xl font-bold text-gray-900">Kelola Produk</h3>
-                    <a href="{{ route('owner.produk.create') }}"
-                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>Tambah Produk</span>
-                    </a>
+                    <div class="flex items-center space-x-2">
+                        <a href=" {{-- {{ route('owner.produk.index') }} --}}"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Lihat Semua</span>
+                        </a>
+                        <a href="{{ route('owner.produk.create') }}"
+                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Tambah Produk</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="w-full overflow-x-auto">
@@ -195,11 +202,18 @@
             <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-xl font-bold text-gray-900">Pesanan Masuk</h3>
-                    <a href="{{ route('owner.pesanan.create') }}"
-                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>Buat Pesanan</span>
-                    </a>
+                    <div class="flex items-center space-x-2">
+                        <a href="{{-- {{ route('owner.pesanan.index') }} --}}"
+                            class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Lihat Semua</span>
+                        </a>
+                        <a href="{{ route('owner.pesanan.create') }}"
+                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Buat Pesanan</span>
+                        </a>
+                    </div>
                 </div>
                 @if (empty($incomingOrders))
                     <div class="text-center py-8 text-gray-500">
@@ -217,11 +231,15 @@
                                         <p class="font-semibold text-gray-900">#{{ $order->id }} -
                                             {{ $order->customer_name }}</p>
                                         <p class="text-sm text-gray-600">
-                                            {{ $order->items->first()->product_name ?? 'Item' }}
-                                            @if ($order->items->count() > 1)
-                                                <span class="text-gray-400 text-xs">(+{{ $order->items->count() - 1 }}
-                                                    lainnya)</span>
-                                            @endif
+                                            @foreach ($order->items as $item)
+                                                <span class="block">
+                                                    {{ $item->product_name }}
+                                                    @if ($item->quantity > 1)
+                                                        <span
+                                                            class="text-gray-400 text-xs">(x{{ $item->quantity }})</span>
+                                                    @endif
+                                                </span>
+                                            @endforeach
                                         </p>
                                         <p class="text-xs text-gray-400 mt-1">
                                             {{ $order->created_at->diffForHumans() }}</p>
@@ -322,7 +340,7 @@
                     <h4 class="font-bold text-gray-900 text-lg">
                         {{ Auth::user()->business_name ??
                             'Nama Bisnis Belum
-                                                                                                                                        Diisi' }}
+                                                                                                                                                                Diisi' }}
                     </h4>
                     <p class="text-sm text-gray-600">{{ Auth::user()->business_category ?? 'Kategori Belum Diatur' }}
                     </p>
@@ -360,11 +378,11 @@
             <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                 <h3 class="text-xl font-bold text-gray-900 mb-6">Aksi Cepat</h3>
                 <div class="space-y-3">
-                    <a href="{{ route('owner.produk.create') }}"
+                    {{-- <a href="{{ route('owner.produk.create') }}"
                         class="w-full bg-green-50 hover:bg-green-100 text-green-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-plus"></i>
                         <span>Tambah Produk</span>
-                    </a>
+                    </a> --}}
                     <a href="#"
                         class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 py-3 rounded-lg font-semibold transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-chart-line"></i>

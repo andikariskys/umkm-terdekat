@@ -12,6 +12,26 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    // Halaman Lihat Semua Pesanan
+    public function index()
+    {
+        $userId = Auth::id();
+
+        // Ambil semua pesanan dengan pagination
+        $orders = Order::where('user_id', $userId)
+            ->with('items')
+            ->latest()
+            ->paginate(10);
+
+        // Statistik pesanan
+        $totalOrders = Order::where('user_id', $userId)->count();
+        $pendingOrders = Order::where('user_id', $userId)->where('status', 'pending')->count();
+        $processingOrders = Order::where('user_id', $userId)->where('status', 'processing')->count();
+        $completedOrders = Order::where('user_id', $userId)->where('status', 'completed')->count();
+
+        return view('owner.orders.index', compact('orders', 'totalOrders', 'pendingOrders', 'processingOrders', 'completedOrders'));
+    }
+
     // Halaman POS / Tambah Pesanan
     public function create()
     {

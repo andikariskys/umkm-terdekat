@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $userId = Auth::id();
+
+        // Ambil semua produk milik owner dengan pagination
+        $products = Product::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        // Statistik produk
+        $totalProducts = Product::where('user_id', $userId)->count();
+        $activeProducts = Product::where('user_id', $userId)->where('status', 'active')->count();
+        $inactiveProducts = Product::where('user_id', $userId)->where('status', 'inactive')->count();
+        $outOfStock = Product::where('user_id', $userId)->where('stock', 0)->count();
+
+        return view('owner.products.index', compact('products', 'totalProducts', 'activeProducts', 'inactiveProducts', 'outOfStock'));
+    }
+
     public function create()
     {
         $userId = Auth::id();

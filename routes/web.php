@@ -12,14 +12,10 @@ use App\Http\Controllers\VisitorController;
 
 // Halaman Pengunjung
 Route::get('/', [VisitorController::class, 'index'])->name('home');
-Route::get('/products', [VisitorController::class, 'products'])->name('products');
-Route::get('/detail-product', function () {
-    return view('detail_product');
-})->name('product.detail');
 Route::get('/business', [VisitorController::class, 'business'])->name('business');
-Route::get('/business-profile', function () {
-    return view('business_profile');
-})->name('business.profile');
+Route::get('/business-profile/{id}', [VisitorController::class, 'business_profile'])->name('business.profile');
+Route::get('/products', [VisitorController::class, 'products'])->name('products');
+Route::get('/detail-product/{id}', [VisitorController::class, 'detail_product'])->name('product.detail');
 Route::get('/contact', [VisitorController::class, 'contact'])->name('contact');
 
 // ===== AUTHENTICATION ROUTES =====

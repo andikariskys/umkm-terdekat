@@ -50,7 +50,6 @@
                     <h2 class="text-3xl font-bold text-gray-900">Produk</h2>
                     <p class="text-gray-600">Temukan produk lokal dari pelaku UMKM</p>
                 </div>
-                <a href="{{ route('business') }}" class="text-green-600 hover:underline">← Kembali</a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

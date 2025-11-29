@@ -1,38 +1,12 @@
-<?php
-// Simple product dataset and selection logic
-$products = [
-    ['id' => 0, 'name' => 'Sablon Kaos Custom Premium', 'price' => 'Rp 50.000', 'image' => '👕', 'seller' => 'Sablon Kreatif', 'description' => 'Sablon kaos custom dengan tinta berkualitas, cocok untuk komunitas, event, dan brand kecil. Pilihan bahan: Combed 20s / 30s.', 'features' => ['Cetak berkualitas tinggi', 'Bisa desain custom', 'Fast turnaround 3-5 hari'], 'stock' => 25, 'maps' => 'https://www.google.com/maps/search/?api=1&query=Sablon+Kreatif+Indonesia', 'whatsapp' => '+6281234567890', 'address' => 'Jl. Merdeka No.10, Bandung'],
-    ['id' => 1, 'name' => 'Keripik Singkong Original', 'price' => 'Rp 15.000', 'image' => '🥔', 'seller' => 'Keripik Renyah', 'description' => 'Keripik singkong gurih dan renyah tanpa pengawet, dikemas rapi untuk oleh-oleh dan snack harian.', 'features' => ['Tanpa pengawet', 'Kemasan 150gr', 'Cemilan favorit keluarga'], 'stock' => 50, 'maps' => 'https://www.google.com/maps/search/?api=1&query=Keripik+Renyah+Indonesia', 'whatsapp' => '+628219876543', 'address' => 'Jl. Pahlawan No.5, Yogyakarta'],
-    ['id' => 2, 'name' => 'Kopi Arabika Lokal Premium', 'price' => 'Rp 25.000', 'image' => '☕', 'seller' => 'Warung Kopi Seduh', 'description' => 'Biji kopi Arabika pilihan, dipanggang medium roast untuk aroma dan rasa seimbang. Cocok untuk espresso dan manual brew.', 'features' => ['Asal: Gayo/Sumatera', 'Kemasan 250gr', 'Aroma kuat, body seimbang'], 'stock' => 10, 'maps' => 'https://www.google.com/maps/search/?api=1&query=Warung+Kopi+Seduh+Indonesia', 'whatsapp' => '+628135792468', 'address' => 'Jl. Teuku Umar No.21, Aceh'],
-    ['id' => 3, 'name' => 'Tas Rajut Handmade', 'price' => 'Rp 75.000', 'image' => '👜', 'seller' => 'Rajut Cantik', 'description' => 'Tas rajut tangan unik, cocok untuk hadiah dan fashion sehari-hari. Setiap tas unik dengan sedikit variasi warna.', 'features' => ['Handmade', 'Bahan katun premium', 'Beragam warna tersedia'], 'stock' => 5, 'maps' => 'https://www.google.com/maps/search/?api=1&query=Rajut+Cantik+Indonesia', 'whatsapp' => '+628778665544', 'address' => 'Jl. Anyelir No.3, Bali'],
-    ['id' => 4, 'name' => 'Roti Manis Coklat Lembut', 'price' => 'Rp 12.000', 'image' => '🍞', 'seller' => 'Roti Mama', 'description' => 'Roti manis dengan isian coklat yang lembut, dipanggang tiap pagi untuk kesegaran maksimal.', 'features' => ['Fresh daily', 'Isian coklat premium', 'Cocok untuk sarapan'], 'stock' => 0, 'maps' => 'https://www.google.com/maps/search/?api=1&query=Roti+Mama+Indonesia', 'whatsapp' => '+6281122334455', 'address' => 'Jl. Raya No.12, Jakarta'],
-    ['id' => 5, 'name' => 'Nasi Goreng Spesial', 'price' => 'Rp 18.000', 'image' => '🍛', 'seller' => 'Nasi Goreng Enak', 'description' => 'Nasi goreng dengan resep rumahan, porsi besar dan bumbu meresap. Bisa request level pedas.', 'features' => ['Porsi besar', 'Dilengkapi telur & acar', 'Bisa pesan antar'], 'stock' => 20, 'maps' => 'https://www.google.com/maps/search/?api=1&query=Nasi+Goreng+Enak+Indonesia', 'whatsapp' => '+628998877665', 'address' => 'Jl. Sudirman No.45, Surabaya'],
-];
-
-// Choose product by ?id (default 0)
-$selectedId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
-$selected = null;
-foreach ($products as $p) {
-    if ($p['id'] === $selectedId) {
-        $selected = $p;
-        break;
-    }
-}
-if ($selected === null) {
-    $selected = $products[0];
-    $selectedId = $products[0]['id'];
-}
-
-?>
 @extends('templates.anonymous')
-@section('title', $selected['name'])
+@section('title', $product['name'])
 @section('content')
     <main class="py-12">
         <div class="max-w-6xl mx-auto px-6">
             <nav class="text-sm text-gray-500 mb-6">
-                <a href="{{ route('home') }}" class="hover:text-green-600">Beranda</a> <a href="#produk"
-                    class="hover:text-green-600">Produk</a> <span class="text-gray-800">
-                    <?= htmlspecialchars($selected['name']) ?>
+                <a href="{{ route('home') }}" class="hover:text-green-600">Beranda</a> / <a href="{{ route('products') }}"
+                    class="hover:text-green-600">Produk</a> <span class="text-gray-800"> /
+                    {{ $product['name'] }}
                 </span>
             </nav>
 
@@ -40,63 +14,48 @@ if ($selected === null) {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 items-start">
                     <!-- Image -->
                     <div class="md:col-span-1 flex items-center justify-center">
-                        <div
-                            class="w-full max-w-md bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center">
-                            <div class="text-[8rem] mb-4">
-                                <?= htmlspecialchars($selected['image']) ?>
+                        @if ($product['image'])
+                            <div class="w-full bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-0 text-center">
+                                <img src="{{ asset('storage/' . $product['image']) }}" alt="{{ $product['name'] }}"
+                                    class="w-full h-[28rem] object-cover rounded-2xl">
                             </div>
-                            <div class="text-sm text-gray-500">Penjual</div>
-                            <div class="font-semibold text-lg text-gray-900">
-                                <?= htmlspecialchars($selected['seller']) ?>
+                        @else
+                            <div class="w-full bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-0 text-center flex items-center justify-center h-[28rem] text-8xl">
+                                {{ '🛍️' }}
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <!-- Info -->
                     <div class="md:col-span-2">
                         <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                            <?= htmlspecialchars($selected['name']) ?>
+                            {{ $product['name'] }}
                         </h1>
                         <div class="flex items-center justify-between md:justify-start gap-6 mb-4">
                             <div class="text-2xl font-bold text-green-600">
-                                <?= htmlspecialchars($selected['price']) ?>
+                                {{ $product['price'] }}
                             </div>
                             <div class="text-sm text-gray-500">Stok: <span class="font-semibold text-gray-700">
-                                    <?= (int) $selected['stock'] ?>
+                                    {{ (int) $product['stock'] }}
                                 </span></div>
                         </div>
 
                         <p class="text-gray-700 mb-6">
-                            <?= htmlspecialchars($selected['description']) ?>
+                            {{ $product['description'] }}
                         </p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <h4 class="text-sm font-semibold mb-2">Fitur</h4>
-                                <ul class="list-disc list-inside text-gray-600">
-                                    <?php foreach ($selected['features'] as $f): ?>
-                                    <li>
-                                        <?= htmlspecialchars($f) ?>
-                                    </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                            <div>
                                 <h4 class="text-sm font-semibold mb-2">Informasi Penjual</h4>
-                                <?php
-                                // Jika Anda punya business id terpisah, ganti $businessId dengan nilai tersebut.
-                                $businessId = (int) $selectedId;
-                                $businessUrl = 'business_profile.php?id=' . $businessId;
-                                ?>
-                                <a href="<?= htmlspecialchars($businessUrl) ?>"
+                                <a href="<?= route('business.profile', ['id' => $product['user_id']]) ?>"
                                     class="inline-flex items-center gap-3 w-full sm:w-auto justify-center border-2 border-green-600 text-green-600 hover:bg-green-50 px-4 py-2 rounded-xl text-sm font-semibold transition">
                                     <i class="fa-solid fa-store"></i>
                                     <div class="text-left">
                                         <div class="font-semibold">
-                                            <?= htmlspecialchars($selected['seller']) ?>
+                                            {{ $product['business_name'] }}
                                         </div>
                                         <div class="text-xs text-gray-500">
-                                            <?= htmlspecialchars($selected['address']) ?>
+                                            {{ $product['address'] }}
                                         </div>
                                     </div>
                                 </a>
@@ -104,28 +63,30 @@ if ($selected === null) {
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <?php
-                            // prepare whatsapp and maps links
-                            $phone = preg_replace('/\D+/', '', $selected['whatsapp']); // remove any non-digit chars
-                            $waText = rawurlencode("Halo, saya tertarik dengan produk \"{$selected['name']}\". Apakah masih tersedia?");
-                            $waLink = "https://wa.me/{$phone}?text={$waText}";
-                            $mapsLink = $selected['maps'];
-                            ?>
-                            <a href="<?= htmlspecialchars($mapsLink) ?>" target="_blank" rel="noopener noreferrer"
+                            @php
+                                // prepare whatsapp and maps links
+                                $phone = preg_replace('/\D+/', '', $product['whatsapp']); // remove any non-digit chars
+                                $waText = rawurlencode(
+                                    "Halo, saya tertarik dengan produk \"{$product['name']}\". Apakah masih tersedia?",
+                                );
+                                $waLink = "https://wa.me/{$phone}?text={$waText}";
+                                $mapsLink = $product['map'] ?? 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($product['business_name']);
+                            @endphp
+                            <a href="{{ $mapsLink }}" target="_blank" rel="noopener noreferrer"
                                 class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl text-sm font-semibold transition shadow-md flex items-center gap-2">
                                 <i class="fa-solid fa-location-dot"></i> Lihat Rute Ke Penjual
                             </a>
 
-                            <a href="<?= htmlspecialchars($waLink) ?>" target="_blank" rel="noopener noreferrer"
+                            <a href="{{ $waLink }}" target="_blank" rel="noopener noreferrer"
                                 class="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 px-6 py-3 rounded-xl text-sm font-semibold transition flex items-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Hubungi Penjual via WhatsApp
                             </a>
                         </div>
 
-                        <?php if ($selected['stock'] <= 0): ?>
-                        <div class="mt-4 text-sm text-red-600">Stok habis — silakan hubungi penjual untuk ketersediaan.
-                        </div>
-                        <?php endif; ?>
+                        @if ($product['stock'] <= 0)
+                            <div class="mt-4 text-sm text-red-600">Stok habis — silakan hubungi penjual untuk ketersediaan.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -138,26 +99,49 @@ if ($selected === null) {
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <?php foreach ($products as $p): if ($p['id'] === $selectedId) continue; ?>
-                    <a href="?id=<?= htmlspecialchars($p['id']) ?>"
-                        class="block bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-1">
+                    @forelse ($products as $p)
+                    @if ($p['id'] === $product['id']) @continue @endif
                         <div
-                            class="aspect-[4/3] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-8xl transition-transform duration-300">
-                            <?= htmlspecialchars($p['image']) ?>
-                        </div>
-                        <div class="p-4">
-                            <div class="text-xs text-gray-500 mb-1">
-                                <?= htmlspecialchars($p['seller']) ?>
+                            class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
+
+                            {{-- Gambar Produk --}}
+                            <div
+                                class="aspect-[4/3] bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center text-8xl transition-transform duration-300">
+                                @if ($p->image)
+                                    <img src="{{ asset('storage/' . $p->image) }}" alt="{{ $p->name }}"
+                                        class="h-full w-full object-cover">
+                                @else
+                                    {{-- Pakai emoji jika tidak ada gambar --}}
+                                    {{ $p->emoji ?? '🛍️' }}
+                                @endif
                             </div>
-                            <h4 class="font-semibold text-gray-900 mb-1">
-                                <?= htmlspecialchars($p['name']) ?>
-                            </h4>
-                            <div class="text-green-600 font-bold">
-                                <?= htmlspecialchars($p['price']) ?>
+
+                            <div class="p-5">
+                                <div class="text-xs text-gray-500 mb-2">
+                                    {{ $p->seller_name ?? 'UMKM Lokal' }}
+                                </div>
+
+                                <h4 class="font-semibold text-gray-900 mb-2 text-base">
+                                    {{ $p->name }}
+                                </h4>
+
+                                <p class="text-green-600 font-bold text-xl mb-4">
+                                    Rp {{ number_format($p->price, 0, ',', '.') }}
+                                </p>
+
+                                <a href="{{ route('product.detail', $p->id) }}"
+                                    class="w-full inline-block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg text-center">
+                                    Lihat Detail
+                                </a>
                             </div>
                         </div>
-                    </a>
-                    <?php endforeach; ?>
+
+                    @empty
+                        <div class="col-span-3 text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+                            <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-3"></i>
+                            <p class="text-gray-500">Belum ada produk tersedia.</p>
+                        </div>
+                    @endforelse
                 </div>
             </section>
         </div>

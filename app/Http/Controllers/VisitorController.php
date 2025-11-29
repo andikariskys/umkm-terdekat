@@ -35,16 +35,42 @@ class VisitorController extends Controller
         return view('business', compact('umkmList'));
     }
 
-    function products() {
+    function business_profile($id)
+    {
+        $umkm = User::findOrFail($id);
+        $products = Product::where('user_id', $id)
+            ->latest()
+            ->get();
+
+        return view('business_profile', compact('umkm', 'products'));
+    }
+
+    function products()
+    {
         $products = Product::latest()
             ->join('users', 'products.user_id', '=', 'users.id')
             ->select('products.*', 'users.name as owner_name')
             ->get();
-        
+
         return view('products', compact('products'));
     }
 
-    function contact() {
+    function detail_product($id)
+    {
+        $product = Product::findOrFail($id)
+            ->join('users', 'products.user_id', '=', 'users.id')
+            ->select('products.*', 'users.name as owner_name', 'users.business_name as business_name', 'users.business_address as address', 'users.business_phone as whatsapp', 'users.business_map as map')
+            ->where('products.id', $id)
+            ->first();
+        $products = Product::inRandomOrder()
+            ->take(6)
+            ->get();
+
+        return view('detail_product', compact('product', 'products'));
+    }
+
+    function contact()
+    {
         return view('contact');
     }
 }

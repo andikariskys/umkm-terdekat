@@ -79,11 +79,11 @@
 
                     <div class="mb-6">
                         <label class="block text-gray-700 font-semibold mb-2" for="product_description">
-                            Deskripsi Produk
+                            Deskripsi Produk <span class="text-red-500">*</span>
                         </label>
                         <textarea id="product_description" name="product_description" rows="4"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-                            placeholder="Jelaskan detail produk Anda...">{{ old('product_description') }}</textarea>
+                            placeholder="Jelaskan detail produk Anda..." required>{{ old('product_description') }}</textarea>
                     </div>
 
                     <div class="mb-6">

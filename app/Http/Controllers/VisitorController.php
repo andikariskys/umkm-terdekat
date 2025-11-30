@@ -24,7 +24,7 @@ class VisitorController extends Controller
             ->get();
         $products = Product::join('users', 'products.user_id', '=', 'users.id')
             ->where('users.status', 'active')
-            ->select('products.*')
+            ->select('products.*', 'users.business_name as business_name')
             ->latest('products.created_at')
             ->take(6)
             ->get();
@@ -96,7 +96,7 @@ class VisitorController extends Controller
             $products = Product::latest()
                 ->join('users', 'products.user_id', '=', 'users.id')
                 ->where('users.status', 'active')
-                ->select('products.*', 'users.name as owner_name')
+                ->select('products.*', 'users.name as owner_name', 'users.business_name as business_name')
                 ->get();
         }
 

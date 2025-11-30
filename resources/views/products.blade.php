@@ -82,7 +82,7 @@
                             </p>
 
                             <div class="text-sm text-gray-500 mb-2">
-                                <i class="fa-solid fa-shop"></i> {{ $p->owner_name }}
+                                <i class="fa-solid fa-shop"></i> {{ $p->business_name }}
                             </div>
 
                             <p class="text-gray-500 text-sm mb-3">

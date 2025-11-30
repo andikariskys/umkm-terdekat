@@ -148,7 +148,7 @@
             </div>
 
             <div class="border-t border-green-500 pt-8 text-center text-green-100 text-sm">
-                &copy; 2025 <strong>UMKMTerdekat</strong>. Semua Hak Dilindungi.
+                &copy; 2025 <strong>UMKMTerdekat - Pria Pasti Juara</strong>. Semua Hak Dilindungi.
             </div>
         </div>
     </footer>

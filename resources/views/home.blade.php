@@ -156,7 +156,7 @@
 
                         <div class="p-5">
                             <div class="text-xs text-gray-500 mb-2">
-                                {{ $p->seller_name ?? 'UMKM Lokal' }}
+                                <i class="fa-solid fa-shop"></i> {{ $p->business_name }}
                             </div>
 
                             <h4 class="font-semibold text-gray-900 mb-2 text-base">

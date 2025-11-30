@@ -92,7 +92,6 @@
 
                 <div class="space-y-3">
                     <input type="hidden" name="csrf-token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="url_store" value="{{ route('owner.pesanan.store') }}">
                     <button id="clearCartBtn"
                         class="w-full bg-red-50 hover:bg-red-100 text-red-700 py-2 rounded-lg font-semibold text-sm transition">
                         <i class="fa-solid fa-trash mr-2"></i>Kosongkan
@@ -228,7 +227,8 @@
             btn.classList.add('opacity-75');
 
             try {
-                const response = await fetch(document.querySelector('input[name="url_store"]').value, {
+                url = "{{ route('owner.pesanan.store') }}";
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

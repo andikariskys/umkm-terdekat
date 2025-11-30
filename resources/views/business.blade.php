@@ -63,7 +63,7 @@
                             class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center text-5xl shadow-lg">
                             @if ($umkm->business_photo)
                                 <img src="{{ asset('storage/' . $umkm->business_photo) }}"
-                                    alt="{{ $umkm->business ?? $umkm->name }}"
+                                    alt="{{ $umkm->business_name }}"
                                     class="w-full h-full object-cover rounded-full">
                             @else
                                 {{ $umkm->emoji ?? '🏪' }}
@@ -79,13 +79,13 @@
 
                         {{-- Nama UMKM --}}
                         <h4 class="font-semibold text-gray-900 mb-2 text-base">
-                            {{ $umkm->business ?? $umkm->name }}
+                            {{ $umkm->business_name }}
                         </h4>
 
                         {{-- Alamat --}}
                         <p class="text-gray-500 text-sm mb-4 flex items-center justify-center">
                             <i class="fa-solid fa-location-dot mr-2"></i>
-                            {{ $umkm->address ?? 'Alamat tidak tersedia' }}
+                            {{ $umkm->business_address }}
                         </p>
 
                         {{-- Tombol Profil --}}

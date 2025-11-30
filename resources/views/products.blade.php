@@ -13,12 +13,12 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Lokasi</p>
-                        <p class="text-lg font-semibold text-gray-900">Serang, Banten <span
+                        <p class="text-lg font-semibold text-gray-900">Matesih, Jawa Tengah <span
                                 class="text-xs text-gray-400">(Ubah lokasi sesuai kebutuhan)</span></p>
                     </div>
                 </div>
                 <div class="text-sm text-gray-500">
-                    Koordinat: <span class="font-medium">-6.1200, 106.1500</span>
+                    Koordinat: <span class="font-medium">-7.644776, 111.023549</span>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
 
                     <select name="category" class="w-full sm:w-48 border border-gray-200 rounded-lg px-3 py-3 bg-white">
                         <option value="">-- Pilih Kategori --</option>
-                        @foreach (['minuman' => 'Minuman', 'makanan' => 'Makanan', 'snack' => 'Snack', 'lainnya' => 'Lainnya'] as $val => $label)
+                        @foreach (['minuman' => 'Minuman', 'makanan' => 'Makanan', 'snack' => 'Snack', 'lainnya' => 'Lainnya', 'jasa penjahit' => 'Jasa Penjahit', 'jasa lainnya' => 'Jasa Lainnya'] as $val => $label)
                             <option value="{{ $val }}" {{ request('category') == $val ? 'selected' : '' }}>
                                 {{ $label }}</option>
                         @endforeach

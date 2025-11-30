@@ -74,7 +74,7 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                             placeholder="Masukkan alamat lengkap UMKM Anda">{{ old('business_address', $user->business_address) }}</textarea>
                     </div>
-
+                    
                     <div class="mb-6">
                         <label class="block text-gray-700 font-semibold mb-3" for="business_map">
                             <i class="fa-solid fa-map-location-dot mr-2"></i>Link Google Maps
@@ -85,7 +85,14 @@
                             placeholder="https://maps.google.com/...">
                         <p class="text-sm text-gray-500 mt-1">Masukkan link lokasi Google Maps (opsional).</p>
                     </div>
-
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3" for="business_address">
+                            <i class="fa-solid fa-location-dot mr-2"></i>Maps
+                        </label>
+                        <div id="map" class="rounded shadow" style="height: 300px;"></div>
+                    </div>
+                    
                     <div class="mb-6">
                         <label class="block text-gray-700 font-semibold mb-3" for="business_phone">
                             <i class="fa-solid fa-phone mr-2"></i>Nomor Telepon / WhatsApp
@@ -244,4 +251,22 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        // Inisialisasi map
+        var map = L.map('map').setView([ -7.644776, 111.023549 ], 13);
+
+        // Tambahkan tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+
+        // Tambah marker
+        L.marker([ -7.644776, 111.023549 ])
+            .addTo(map)
+            .bindPopup('Posisi Anda.')
+            .openPopup();
+    </script>
 @endsection

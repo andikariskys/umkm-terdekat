@@ -7,6 +7,8 @@
     <title>UMKMTerdekat - @yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body class="bg-gray-50 min-h-screen">
@@ -28,21 +30,21 @@
                     @endphp
 
                     {{-- @if ($currentRoute === 'owner.dashboard') --}}
-                        <div class="flex items-center space-x-2">
-                            <div class="text-right hidden sm:block">
-                                <p class="font-semibold text-gray-900">{{ Auth::user()->name }}</p>
-                                <p class="text-xs text-gray-500">{{ Auth::user()->business_name ?? 'Nama Usaha' }}</p>
-                            </div>
-
-                            @if (Auth::user()->business_photo)
-                                <img src="{{ asset('storage/' . Auth::user()->business_photo) }}" alt="Profile"
-                                    class="w-10 h-10 rounded-lg object-cover border border-green-100">
-                            @else
-                                <div class="bg-green-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center">
-                                    <i class="fa-solid fa-store text-green-600"></i>
-                                </div>
-                            @endif
+                    <div class="flex items-center space-x-2">
+                        <div class="text-right hidden sm:block">
+                            <p class="font-semibold text-gray-900">{{ Auth::user()->name }}</p>
+                            <p class="text-xs text-gray-500">{{ Auth::user()->business_name ?? 'Nama Usaha' }}</p>
                         </div>
+
+                        @if (Auth::user()->business_photo)
+                            <img src="{{ asset('storage/' . Auth::user()->business_photo) }}" alt="Profile"
+                                class="w-10 h-10 rounded-lg object-cover border border-green-100">
+                        @else
+                            <div class="bg-green-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center">
+                                <i class="fa-solid fa-store text-green-600"></i>
+                            </div>
+                        @endif
+                    </div>
                     {{-- @else
                         <a href="{{ route('owner.dashboard') }}"
                             class="text-gray-600 hover:text-gray-900 flex items-center space-x-2">

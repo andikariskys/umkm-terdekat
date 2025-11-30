@@ -20,18 +20,21 @@ class DashboardController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $startOfWeek = Carbon::now()->startOfWeek();
 
-        // Data Produk
-        $myProducts = Product::where('user_id', $userId)->latest()->get();
+        // Data Produk (5 Produk Terbaru untuk Dashboard)
+        $myProducts = Product::where('user_id', $userId)
+            ->latest()
+            ->take(5)
+            ->get();
 
         $activeProductCount = Product::where('user_id', $userId)
             ->where('status', 'active')
             ->count();
 
-        // Data Pesanan (5 Terakhir)
+        // Data Pesanan (3 Pesanan Terbaru untuk Dashboard)
         $incomingOrders = Order::where('user_id', $userId)
             ->with('items')
             ->latest()
-            ->take(5)
+            ->take(3)
             ->get();
 
         // Hitung Statistik

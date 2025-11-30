@@ -6,6 +6,7 @@ use App\Http\Controllers\Owner\OrderController;
 use App\Http\Controllers\Owner\ProductController;
 use App\Http\Controllers\Owner\ProfileController;
 use App\Http\Controllers\Owner\DashboardController;
+use App\Http\Controllers\Owner\ReportController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\VisitorController;
@@ -43,9 +44,7 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('owner.dashboard');
 
     // Kelola Produk
-    Route::get('/produk', function () {
-        return view('owner.produk');
-    })->name('owner.produk');
+    Route::get('/produk', [ProductController::class, 'index'])->name('owner.produk.index');
 
     Route::get('/produk/tambah', [ProductController::class, 'create'])->name('owner.produk.create'); // Form
     Route::post('/produk/tambah', [ProductController::class, 'store'])->name('owner.produk.store');   // Action Simpan
@@ -55,6 +54,7 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::delete('/produk/{id}', [ProductController::class, 'destroy'])->name('owner.produk.destroy');
 
     // Pesanan/POS
+    Route::get('/pesanan', [OrderController::class, 'index'])->name('owner.pesanan.index');
     Route::get('/pesanan/tambah', [OrderController::class, 'create'])->name('owner.pesanan.create');
     Route::post('/pesanan/simpan', [OrderController::class, 'store'])->name('owner.pesanan.store');
     Route::patch('/pesanan/{id}/status', [OrderController::class, 'updateStatus'])->name('owner.pesanan.update-status');
@@ -65,12 +65,13 @@ Route::prefix('owner')->middleware(['auth', 'role:owner'])->group(function () {
     Route::put('/profil', [ProfileController::class, 'update'])->name('owner.profil.update');
 
     // Laporan
-    Route::get('/laporan', function () {
-        return view('owner.laporan');
-    })->name('owner.laporan');
+    Route::get('/laporan', [ReportController::class, 'index'])->name('owner.laporan');
 });
 
 // ===== ADMIN ROUTES (Harus Login + Role Admin) =====
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/umkm', [AdminController::class, 'allUmkm'])->name('admin.umkm.index');
+    Route::get('/transaksi', [AdminController::class, 'allTransactions'])->name('admin.transactions.index');
+    Route::patch('/umkm/{id}/update-status', [AdminController::class, 'updateUmkmStatus'])->name('admin.umkm.update-status');
 });

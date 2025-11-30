@@ -34,11 +34,10 @@ class AdminController extends Controller
             ->take(5)
             ->get();
 
-        // 3. Transaksi Terbaru (5 Terbaru)
-        // PERBAIKAN: Hapus ->map()
+        // 3. Transaksi Terbaru (3 Terbaru)
         $recentTransactions = Order::with(['items'])
             ->latest()
-            ->take(5)
+            ->take(3)
             ->get();
 
         // 4. Daftar Pengguna Baru (5 Terbaru)
@@ -77,5 +76,42 @@ class AdminController extends Controller
         $umkm->save();
 
         return back()->with('success', 'Status UMKM berhasil diperbarui!');
+    }
+
+    // Lihat Semua UMKM
+    public function allUmkm()
+    {
+        $umkmList = User::where('role', 'owner')
+            ->withCount('products')
+            ->latest()
+            ->paginate(10);
+
+        $stats = [
+            'total' => User::where('role', 'owner')->count(),
+            'active' => User::where('role', 'owner')->where('status', 'active')->count(),
+            'inactive' => User::where('role', 'owner')->where('status', 'inactive')->count(),
+            'pending' => User::where('role', 'owner')->where('status', 'pending')->count(),
+        ];
+
+        return view('admin.umkm.index', compact('umkmList', 'stats'));
+    }
+
+    // Lihat Semua Transaksi
+    public function allTransactions()
+    {
+        $transactions = Order::with(['items', 'user'])
+            ->latest()
+            ->paginate(10);
+
+        $stats = [
+            'total' => Order::count(),
+            'pending' => Order::where('status', 'pending')->count(),
+            'processing' => Order::where('status', 'processing')->count(),
+            'completed' => Order::where('status', 'completed')->count(),
+            'cancelled' => Order::where('status', 'cancelled')->count(),
+            'revenue' => Order::where('status', 'completed')->sum('total_amount'),
+        ];
+
+        return view('admin.transactions.index', compact('transactions', 'stats'));
     }
 }

@@ -12,7 +12,9 @@ class VisitorController extends Controller
     function index()
     {
         $countUmkm = User::where('role', 'owner')->where('status', 'active')->count();
-        $countProducts = Product::count();
+        $countProducts = Product::join('users', 'products.user_id', '=', 'users.id')
+            ->where('users.status', 'active')
+            ->count();
         $countOrdersToday = Order::whereDate('created_at', today())
             ->count();
         $umkmList = User::where('role', 'owner')
@@ -32,11 +34,29 @@ class VisitorController extends Controller
 
     function business()
     {
-        $umkmList = User::where('role', 'owner')
-            ->where('status', 'active')
-            ->latest()
-            ->get();
-
+        if ($category = request('category')) {
+            $umkmList = User::where('role', 'owner')
+                ->where('status', 'active')
+                ->where('business_category', $category)
+                ->latest()
+                ->get();
+        } else if ($q = request('q')) {
+            $umkmList = User::where('role', 'owner')
+                ->where('status', 'active')
+                ->where(function ($query) use ($q) {
+                    $query->where('name', 'like', "%{$q}%")
+                        ->orWhere('business_name', 'like', "%{$q}%")
+                        ->orWhere('business_category', 'like', "%{$q}%")
+                        ->orWhere('business_address', 'like', "%{$q}%");
+                })
+                ->latest()
+                ->get();
+        } else {
+            $umkmList = User::where('role', 'owner')
+                ->where('status', 'active')
+                ->latest()
+                ->get();
+        }
         return view('business', compact('umkmList'));
     }
 
@@ -54,11 +74,31 @@ class VisitorController extends Controller
 
     function products()
     {
-        $products = Product::latest()
-            ->join('users', 'products.user_id', '=', 'users.id')
-            ->where('users.status', 'active')
-            ->select('products.*', 'users.name as owner_name')
-            ->get();
+        if ($category = request('category')) {
+            $products = Product::latest()
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->where('users.status', 'active')
+                ->where('products.category', $category)
+                ->select('products.*', 'users.name as owner_name')
+                ->get();
+        } else if ($q = request('q')) {
+            $products = Product::latest()
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->where('users.status', 'active')
+                ->where(function ($query) use ($q) {
+                    $query->where('products.name', 'like', "%{$q}%")
+                        ->orWhere('products.category', 'like', "%{$q}%")
+                        ->orWhere('products.description', 'like', "%{$q}%");
+                })
+                ->select('products.*', 'users.name as owner_name')
+                ->get();
+        } else {
+            $products = Product::latest()
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->where('users.status', 'active')
+                ->select('products.*', 'users.name as owner_name')
+                ->get();
+        }
 
         return view('products', compact('products'));
     }

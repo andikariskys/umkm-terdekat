@@ -13,27 +13,28 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Lokasi</p>
-                        <p class="text-lg font-semibold text-gray-900">Serang, Banten <span
+                        <p class="text-lg font-semibold text-gray-900">Matesih, Jawa Tengah <span
                                 class="text-xs text-gray-400">(Ubah lokasi sesuai kebutuhan)</span></p>
                     </div>
                 </div>
                 <div class="text-sm text-gray-500">
-                    Koordinat: <span class="font-medium">-6.1200, 106.1500</span>
+                    Koordinat: <span class="font-medium">-7.644776, 111.023549</span>
                 </div>
             </div>
 
-            <form action="all_businesses.php" method="get"
-                class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+            <form action="{{ route('business') }}" method="get" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                     <label for="q" class="sr-only">Cari usaha</label>
                     <input id="q" name="q" type="search" placeholder="Cari nama, kategori, atau alamat..."
-                        class="w-full sm:flex-1 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-200" />
+                        class="w-full sm:flex-1 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-200" value="{{ request('q') }}" />
 
                     <select name="category" class="w-full sm:w-48 border border-gray-200 rounded-lg px-3 py-3 bg-white">
-                        <option value="">Semua Kategori</option>
-                        <option value="F&B">F&B</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Jasa">Jasa</option>
+                        <option value="" selected>Semua Kategori</option>
+                        @foreach (['F&B', 'Fashion', 'Kerajinan', 'Elektronik', 'Jasa', 'Pertanian', 'Lainnya'] as $cat)
+                            <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>
+                                {{ $cat }}
+                            </option>
+                        @endforeach
                     </select>
 
                     <button type="submit"

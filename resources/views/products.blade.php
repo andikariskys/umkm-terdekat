@@ -3,7 +3,7 @@
 @section('title', 'Produk')
 
 @section('content')
-@use('\Illuminate\Support\Str')
+    @use('\Illuminate\Support\Str')
     <main class="py-12">
         <div class="max-w-7xl mx-auto px-6 mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
@@ -22,18 +22,19 @@
                 </div>
             </div>
 
-            <form action="all_businesses.php" method="get"
+            <form action="{{ route('products') }}" method="get"
                 class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                     <label for="q" class="sr-only">Cari usaha</label>
-                    <input id="q" name="q" type="search" placeholder="Cari nama, kategori, atau alamat..."
-                        class="w-full sm:flex-1 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-200" />
+                    <input id="q" name="q" type="search" placeholder="Cari nama, kategori, atau alamat..." 
+                        class="w-full sm:flex-1 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-200" value="{{ request('q') }}" />
 
                     <select name="category" class="w-full sm:w-48 border border-gray-200 rounded-lg px-3 py-3 bg-white">
-                        <option value="">Semua Kategori</option>
-                        <option value="F&B">F&B</option>
-                        <option value="Retail">Retail</option>
-                        <option value="Jasa">Jasa</option>
+                        <option value="">-- Pilih Kategori --</option>
+                        @foreach (['minuman' => 'Minuman', 'makanan' => 'Makanan', 'snack' => 'Snack', 'lainnya' => 'Lainnya'] as $val => $label)
+                            <option value="{{ $val }}" {{ request('category') == $val ? 'selected' : '' }}>
+                                {{ $label }}</option>
+                        @endforeach
                     </select>
 
                     <button type="submit"
@@ -54,7 +55,8 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @forelse ($products as $p)
-                    <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
+                    <div
+                        class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-2">
 
                         {{-- Gambar Produk --}}
                         <div
@@ -69,7 +71,8 @@
                         </div>
 
                         <div class="text-center mb-2 p-5">
-                            <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">{{ $p->category }}</span>
+                            <span
+                                class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">{{ $p->category }}</span>
                             <h4 class="font-semibold text-gray-900 mb-2 text-base">
                                 {{ $p->name }}
                             </h4>

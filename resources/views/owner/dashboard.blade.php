@@ -376,3 +376,14 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+<script>
+        function printReceipt(id) {
+            var url = "{{ route('owner.pesanan.print', ':id') }}";
+            url = url.replace(':id', id);
+            
+            // Membuka popup window khusus print dengan ukuran struk thermal
+            window.open(url, '_blank', 'width=1000,height=600');
+        }
+    </script>
+@endsection

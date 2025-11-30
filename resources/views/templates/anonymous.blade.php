@@ -48,8 +48,15 @@
                         class="{{ $currentRoute === 'products' ? 'text-green-600 font-semibold' : 'text-gray-700 hover:text-green-600 transition font-medium' }}">Produk</a>
                     <a href="{{ route('contact') }}"
                         class="{{ $currentRoute === 'contact' ? 'text-green-600 font-semibold' : 'text-gray-700 hover:text-green-600 transition font-medium' }}">Kontak</a>
-                    <a href="{{ route('login') }}"
-                        class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Login</a>
+                    @auth
+                        @if (Auth::user()->role === 'admin')
+                            <a href="{{ route('admin.dashboard') }}" class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Dashboard Admin</a>
+                        @else
+                        <a href="{{ route('owner.dashboard') }}" class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Dashboard</a>
+                        @endif
+                    @else
+                        <a href="{{ route('login') }}" class="text-white px-4 py-2 rounded-lg bg-green-600 transition font-medium">Login</a>
+                    @endauth
                 </nav>
             </div>
 
